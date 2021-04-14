@@ -6,6 +6,7 @@
       <option value="none" selected disabled hidden>
         Select an Option
       </option>
+      <option value="canada">Entire Canada</option>
       <option value="AB">Alberta</option>
       <option value="BC">British Columbia </option>
       <option value="MB">Manitoba</option>
@@ -62,16 +63,25 @@ export default {
   name: "App",
   data() {
     return {
-      prov: "ON",
+      prov: "canada",
 
       range: {
-        start: new Date(),
+        start: this.getYesterday(),
         end: new Date(),
       },
       masks: {
         input: "YYYY-MM-DD",
       },
     };
+  },
+  methods: {
+    getYesterday() {
+      let today = new Date();
+      let yesterday = new Date(today);
+
+      yesterday.setDate(yesterday.getDate() - 1);
+      return yesterday;
+    },
   },
   components: {
     HelloWorld,
@@ -80,12 +90,16 @@ export default {
 </script>
 
 <style>
+body {
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+  height: 100vh;
 }
 </style>
